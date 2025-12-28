@@ -1,0 +1,60 @@
+"""
+simulator.py
+Simulates real-time satellite telemetry data with random anomalies.
+"""
+import time
+import random
+import csv
+from datetime import datetime
+
+DATA_FILE = 'data/satellite.csv'
+
+# Initial normal values
+ALTITUDE = 400  # km
+VELOCITY = 7.8  # km/s
+SIGNAL = 95     # %
+
+
+def generate_telemetry():
+    """Generate normal telemetry with occasional anomalies."""
+    global ALTITUDE, VELOCITY, SIGNAL
+    # Normal drift
+    ALTITUDE += random.uniform(-0.2, 0.2)
+    VELOCITY += random.uniform(-0.01, 0.01)
+    SIGNAL += random.uniform(-0.2, 0.2)
+
+    # Inject anomaly randomly
+    anomaly = random.random() < 0.15  # 15% chance
+    if anomaly:
+        anomaly_type = random.choice(['altitude', 'velocity', 'signal'])
+        if anomaly_type == 'altitude':
+            ALTITUDE += random.uniform(-5, 5)
+        elif anomaly_type == 'velocity':
+            VELOCITY += random.uniform(-0.5, 0.5)
+        elif anomaly_type == 'signal':
+            SIGNAL += random.uniform(-10, 10)
+
+    # Clamp values
+    ALTITUDE = max(350, min(ALTITUDE, 450))
+    VELOCITY = max(7.0, min(VELOCITY, 8.5))
+    SIGNAL = max(60, min(SIGNAL, 100))
+
+    return {
+        'timestamp': datetime.utcnow().isoformat() + 'Z',
+        'altitude': round(ALTITUDE, 2),
+        'velocity': round(VELOCITY, 2),
+        'signal_strength': round(SIGNAL, 2)
+    }
+
+def write_telemetry(row):
+    with open(DATA_FILE, 'a', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=['timestamp', 'altitude', 'velocity', 'signal_strength'])
+        writer.writerow(row)
+
+if __name__ == '__main__':
+    print('Starting telemetry simulation...')
+    while True:
+        telemetry = generate_telemetry()
+        write_telemetry(telemetry)
+        print('Telemetry:', telemetry)
+        time.sleep(5)

@@ -1,0 +1,114 @@
+body {
+    background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.container {
+    max-width: 1100px;
+    margin: 40px auto 0 auto;
+    padding: 20px;
+}
+.neon-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: #00ffe7;
+    text-shadow: 0 0 10px #00ffe7, 0 0 30px #00ffe7;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+.neon-title span {
+    color: #ff00c8;
+    text-shadow: 0 0 10px #ff00c8, 0 0 30px #ff00c8;
+    font-size: 1.1rem;
+    display: block;
+    margin-top: 8px;
+}
+.dashboard-cards {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.glass-card {
+    background: rgba(30, 40, 60, 0.55);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    border-radius: 18px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    padding: 24px 32px;
+    min-width: 260px;
+    min-height: 140px;
+    transition: box-shadow 0.3s, border 0.3s;
+    position: relative;
+    margin-bottom: 12px;
+    animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.card-critical {
+    border: 2px solid #ff0059;
+    box-shadow: 0 0 24px #ff0059;
+}
+.card-warning {
+    border: 2px solid #ffe600;
+    box-shadow: 0 0 18px #ffe600;
+}
+.card-normal {
+    border: 2px solid #00ffe7;
+    box-shadow: 0 0 12px #00ffe7;
+}
+.status-normal {
+    color: #00ffe7;
+    font-weight: bold;
+    text-shadow: 0 0 8px #00ffe7;
+}
+.status-warning {
+    color: #ffe600;
+    font-weight: bold;
+    text-shadow: 0 0 8px #ffe600;
+}
+.status-critical {
+    color: #ff0059;
+    font-weight: bold;
+    text-shadow: 0 0 8px #ff0059;
+}
+.telemetry-values {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    line-height: 2.1rem;
+}
+.chart-card {
+    margin: 0 auto 32px auto;
+    max-width: 900px;
+    min-height: 320px;
+    background: rgba(30, 40, 60, 0.7);
+    border: 1.5px solid rgba(0,255,231,0.12);
+    box-shadow: 0 0 24px #00ffe7;
+    padding: 32px 24px 24px 24px;
+}
+canvas {
+    background: transparent;
+}
+footer {
+    text-align: center;
+    color: #888;
+    margin-top: 40px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    background: #1a2233;
+}
+::-webkit-scrollbar-thumb {
+    background: #222b3a;
+    border-radius: 8px;
+}
